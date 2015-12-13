@@ -5,24 +5,16 @@ execute "adduser zdtd" do
   not_if "grep -E \"^zdtd:\" /etc/passwd"
 end
 
-directory "/var/run/zdtd-8080" do
-  owner "zdtd"
-  group "zdtd"
-  mode "770"
-end
-
-directory "/var/run/zdtd-8081" do
-  owner "zdtd"
-  group "zdtd"
-  mode "770"
-end
-
 remote_directory "/var/zdtd" do
   source "files/var/zdtd"
   owner "zdtd"
   group "zdtd"
 end
 
+directory "/var/zdtd/run"
+directory "/var/zdtd/run/zdtd-8080"
+directory "/var/zdtd/run/zdtd-8081"
+directory "/var/zdtd/log"
 
 execute "git clone https://github.com/af-not-found/ZeroDownTimeDeployment.git" do
   cwd "/var/zdtd"
