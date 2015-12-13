@@ -2,12 +2,6 @@
 
 set -eu
 
-cd /var/zdtd/ZeroDownTimeDeployment/
-
-mvn clean install spring-boot:repackage -Dmaven.test.skip=true
-
-cp -f /var/zdtd/ZeroDownTimeDeployment/target/zdtd.jar /var/zdtd/zdtd-next.jar
-
 ln -f /var/zdtd/zdtd-next.jar /var/zdtd/zdtd-8081.jar
 
 /etc/init.d/zdtd-8081 start
